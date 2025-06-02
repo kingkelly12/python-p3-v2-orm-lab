@@ -23,6 +23,31 @@ class Employee:
 
     def __repr__(self):
         return f"<Employee {self.id}: {self.name}, {self.job_title}, Department ID: {self.department_id}>"
+    
+    @property
+    def job_title(self):
+        return self._job_title
+    
+    @job_title.setter
+    def job_title(self, value):
+        if not isinstance(value, str):
+            raise ValueError("Job title must be a string")
+        if len(value) == 0:
+            raise ValueError("Job title cannot be empty")
+        self._job_title = value
+        
+    def __str__(self):
+        return f"{self.name} - {self.job_title} (Department ID: {self.department_id})"
+    
+    @property
+    def department(self):
+        return self._department
+    
+    @department.setter
+    def department(self, value):
+        if not isinstance(value, department):  # Assuming Department is the class
+            raise ValueError("Department must be a Department instance")
+        self._department = value
 
     @classmethod
     def create_table(cls):
