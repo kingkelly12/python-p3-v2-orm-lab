@@ -1,5 +1,4 @@
 from __init__ import CONN, CURSOR
-from review import Review
 from department import Department  # Assuming Department is defined in department.py
 
 class Employee:
@@ -42,14 +41,16 @@ class Employee:
         return f"{self.name} - {self.job_title} (Department ID: {self.department_id})"
     
     @property
-    def department(self):
-        return self._department
-    
-    @department.setter
-    def department(self, value):
-        if not isinstance(value, department):  # Assuming Department is the class
-            raise ValueError("Department must be a Department instance")
-        self._department = value
+    def department_id(self):
+        return self._department_id
+
+    @department_id.setter
+    def department_id(self, value):
+        if not isinstance(value, int):
+            raise ValueError("Department ID must be an integer")
+        if not Department.find_by_id(value):
+            raise ValueError(f"Department with ID {value} does not exist")
+        self._department_id = value
 
     @classmethod
     def create_table(cls):

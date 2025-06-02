@@ -9,6 +9,7 @@ class Review:
         self.year = year
         self.summary = summary
         self.employee_id = employee_id
+        self._employee = None
 
     def __repr__(self):
         return (
@@ -39,14 +40,16 @@ class Review:
         self._summary = value
     
     @property
-    def employee(self):
-        return self._employee
-    
-    @employee.setter
-    def employee(self, value):
-        if not isinstance(value, Employee):  # Assuming Employee is the class
-            raise ValueError("Employee must be an Employee instance")
-        self._employee = value
+    def employee_id(self):
+        return self._employee_id
+
+    @employee_id.setter
+    def employee_id(self, value):
+        if not isinstance(value, int):
+            raise ValueError("Employee ID must be an integer")
+        if not Employee.find_by_id(value):
+            raise ValueError(f"Employee with ID {value} does not exist")
+        self._employee_id = value
     
     @classmethod
     def create_table(cls):
