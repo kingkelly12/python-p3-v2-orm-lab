@@ -1,4 +1,6 @@
 from __init__ import CONN, CURSOR
+from review import Review
+from department import Department  # Assuming Department is defined in department.py
 
 class Employee:
     all = {}
